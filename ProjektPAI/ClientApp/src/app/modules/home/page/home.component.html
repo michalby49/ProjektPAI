@@ -1,0 +1,15 @@
+<div *ngIf="currencyTable$ | async as currencyTable; else loading">
+    <app-dashboard [currencyTable]="currencyTable[0].rates"
+                   (selectedCurrency)='selectedCurrency($event)'></app-dashboard>
+</div>
+<div *ngIf="currencyExchangeRates$ | async as currencyExchangeRates; else emptyChart">
+    <app-currency-chart [currencyExchangeRates]="currencyExchangeRates"></app-currency-chart>
+</div>
+
+<ng-template #loading>
+    Loading stuff...
+</ng-template>
+
+<ng-template #emptyChart>
+    Empty chart
+</ng-template>

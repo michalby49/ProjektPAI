@@ -1,0 +1,17 @@
+.default-layout-content {
+  grid-area: main;
+  min-height: 80vh;
+  max-width: 80vw;
+}
+  
+.default-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+      "sidebar main";
+}
+
+.default-layout-sidebar {
+  grid-area: sidebar;
+  align-items: end;
+}
