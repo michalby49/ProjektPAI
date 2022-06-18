@@ -1,15 +1,19 @@
-<div *ngIf="currencyTable$ | async as currencyTable; else loading">
-    <app-dashboard [currencyTable]="currencyTable[0].rates"
-                   (selectedCurrency)='selectedCurrency($event)'></app-dashboard>
-</div>
-<div *ngIf="currencyExchangeRates$ | async as currencyExchangeRates; else emptyChart">
-    <app-currency-chart [currencyExchangeRates]="currencyExchangeRates"></app-currency-chart>
-</div>
+<div class="container">
+  <div *ngIf="currencyTable$ | async as currencyTable; else loading">
+    <app-filter [currencyTable]="currencyTable[0].rates"
+                (selectedCurrency)='selectedCurrency($event)'
+                (selectedDate)='selectedDate($event)'></app-filter>
+  </div>
+  <div class="container__chart">
+    <app-currency-chart *ngIf="currencyExchangeRates$ | async as currencyExchangeRates; else emptyChart"
+                        [rates]="currencyExchangeRates.rates | chartValue"
+                        [date]="currencyExchangeRates.rates | chartLabel"></app-currency-chart>
+  </div>
 
-<ng-template #loading>
+  <ng-template #loading>
     Loading stuff...
-</ng-template>
+  </ng-template>
 
-<ng-template #emptyChart>
-    Empty chart
-</ng-template>
+  <ng-template #emptyChart>
+  </ng-template>
+</div>

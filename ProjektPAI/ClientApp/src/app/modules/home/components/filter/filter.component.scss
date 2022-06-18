@@ -1,0 +1,18 @@
+.filter{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  border-bottom: solid 1px #e8e9ef;
+
+  &__currency{
+    &--input{
+      margin-left: 0.5rem
+    }
+  }
+
+  &__date{
+
+  }
+}
+

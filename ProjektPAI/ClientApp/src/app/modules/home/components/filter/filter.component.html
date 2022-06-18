@@ -1,0 +1,30 @@
+<div class="filter">
+  <div class="filter__currency">
+    <span class="">PLN na</span>
+    <mat-form-field class="filter__currency--input">
+      <input type="text"
+             aria-label="Number"
+             matInput
+             [formControl]="currency"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption
+                        #auto="matAutocomplete"
+                        (optionSelected)="selectOption($event)"
+                        [displayWith]="getOptionText">
+        <mat-option *ngFor="let option of filteredOptions | async"
+                    [value]="option">
+          {{option.currency}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="filter__date">
+    <mat-button-toggle-group [formControl]="date" (change)="selectNewDate()">
+      <mat-button-toggle value="1T">1T</mat-button-toggle>
+      <mat-button-toggle value="1M">1M</mat-button-toggle>
+      <mat-button-toggle value="3M">3M</mat-button-toggle>
+      <mat-button-toggle value="6M">6M</mat-button-toggle>
+      <mat-button-toggle value="1R">1R</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>

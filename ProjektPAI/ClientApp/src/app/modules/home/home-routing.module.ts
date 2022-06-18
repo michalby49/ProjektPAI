@@ -3,21 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './page/home.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-    },
-    {
-        path: 'home',
-        component: HomeComponent
-    }
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    component: HomeComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
-    providers: [],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+  providers: [],
 })
 export class HomeRoutingModule {
 }

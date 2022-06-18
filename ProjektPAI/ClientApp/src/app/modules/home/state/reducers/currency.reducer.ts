@@ -1,20 +1,30 @@
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
-import { Currency, CurrencySearchRequest } from '../../models';
+import { Currency, CurrencySearchRequest, CurrencyTable } from '../../models';
+import { CurrencyActions, CurrencyTableActions } from '../actions';
 import * as AppState from '../../../../core/state/app.state';
-import { CurrencyActions } from '../actions';
 
 export const STATE_KEY = 'currency';
 
 export interface CurrencyState {
-  page: Currency[];
-  query: CurrencySearchRequest;
+  currency: Currency;
+  currencyQuery: CurrencySearchRequest;
+  currencyTable: CurrencyTable[];
   error: string;
   loading: boolean;
 }
 
+
 const initialState: CurrencyState = {
-  page: null,
-  query: null,
+  currency: null as any,
+  currencyQuery: {
+    code: 'USD',
+    dateFrom: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth() - 1,
+      new Date().getDate()
+    )
+  },
+  currencyTable: null as any,
   error: '',
   loading: true,
 };
@@ -30,11 +40,27 @@ export const reducers = createReducer<CurrencyState>(
   on(CurrencyActions.loadCurrencySuccess, (state, action): CurrencyState => {
     return {
       ...state,
-      page: action.page,
+      currency: action.item,
+      currencyQuery: action.query,
       loading: false,
     };
   }),
   on(CurrencyActions.loadCurrencyFailure, (state, action): CurrencyState => {
+    return {
+      ...state,
+      error: action.error,
+      loading: false,
+    };
+  }),
+
+  on(CurrencyTableActions.loadCurrencyTableSuccess, (state, action): CurrencyState => {
+    return {
+      ...state,
+      currencyTable: action.item,
+      loading: false,
+    };
+  }),
+  on(CurrencyTableActions.loadCurrencyTableFailure, (state, action): CurrencyState => {
     return {
       ...state,
       error: action.error,
